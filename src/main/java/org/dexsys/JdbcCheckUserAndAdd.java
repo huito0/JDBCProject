@@ -8,7 +8,7 @@ public class JdbcCheckUserAndAdd {
     private static final String URI = "jdbc:postgresql://localhost:5432/student";
 
     public void checkUserInTable (String name, String secondName, int age) {
-        boolean isUserHere = false;
+        boolean isUserInBase = false;
         try {
             Connection connection = DriverManager.getConnection(URI, USER_NAME_DB, PASS_DB);
             Statement statement = connection.createStatement();
@@ -16,12 +16,12 @@ public class JdbcCheckUserAndAdd {
                 ResultSet resultSet = statement.executeQuery(String.format(
                         "SELECT * FROM STUDENT WHERE NAME = '%s' AND SECONDNAME = '%s' AND AGE = '%s'", name, secondName, age));
                 if (resultSet.next()) {
-                    isUserHere = true;
+                    isUserInBase = true;
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            if (!isUserHere) {
+            if (!isUserInBase) {
                 statement.execute(String.format(
                         "INSERT INTO STUDENT (NAME, SECONDNAME, AGE) VALUES ('%s', '%s', '%s')",
                         name, secondName, age));
