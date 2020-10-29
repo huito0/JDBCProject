@@ -21,6 +21,7 @@ public class JdbcCheckUserAndAdd {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+
             if (!isUserInBase) {
                 statement.execute(String.format(
                         "INSERT INTO STUDENT (NAME, SECONDNAME, AGE) VALUES ('%s', '%s', '%s')",
